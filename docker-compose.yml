@@ -1,0 +1,30 @@
+version: "3.4"
+
+services:
+  postgres:
+    image: "postgres"
+    restart: always
+    ports:
+      - "5432:5432"
+    env_file:
+      - ./.env
+    volumes:
+      - "pg:/var/lib/postgresql/data"
+
+  chainlink:
+    image: "smartcontract/chainlink"
+    restart: always
+    env_file:
+      - ./.env
+    environment:
+      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?sslmode=disable
+    ports: 
+      - "6688:6688"
+    links:
+      - "postgres"
+    volumes:
+      - "./chainlink:/chainlink"
+    command: "local n -p /chainlink/.password -a /chainlink/.api"
+
+volumes:
+  pg:
