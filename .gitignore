@@ -1,3 +1,8 @@
 chainlink/tempkeys
 chainlink/log.jsonl
 chainlink/secret
+chainlink/.api
+chainlink/.password
+.DS_Store
+# DAppNodeSDK release directories
+build_*

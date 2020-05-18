@@ -1,0 +1,30 @@
+{
+  "postgresUser": {
+    "type": "environment",
+    "name": "POSTGRES_USER"
+  },
+  "postgresPassword": {
+    "type": "environment",
+    "name": "POSTGRES_PASSWORD"
+  },
+  "postgresDb": {
+    "type": "environment",
+    "name": "POSTGRES_DB"
+  },
+  "notificationEmail": {
+    "type": "environment",
+    "name": "NOTIFICATION_EMAIL"
+  },
+  "oracleContractAddress": {
+    "type": "environment",
+    "name": "ORACLE_CONTRACT_ADDRESS"
+  },
+  "dbPassword": {
+    "type": "fileUpload",
+    "path": "/chainlink/.password"
+  },
+  "uiPassword": {
+    "type": "fileUpload",
+    "path": "/chainlink/.api"
+  }
+}

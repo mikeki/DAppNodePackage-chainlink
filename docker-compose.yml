@@ -1,27 +1,36 @@
 version: "3.4"
-
 services:
-  postgres:
-    image: "postgres"
+  chainlink-db.public.dappnode.eth:
+    image: "chainlink-db.public.dappnode.eth"
     restart: always
     ports:
       - "5432:5432"
-    env_file:
-      - ./.env
+    environment:
+      - "POSTGRES_USER="
+      - "POSTGRES_PASSWORD="
+      - "POSTGRES_DB="
+      - "DATABASE_TIMEOUT=0"
     volumes:
       - "pg:/var/lib/postgresql/data"
 
-  chainlink:
+  chainlink.public.dappnode.eth:
     image: "smartcontract/chainlink"
     restart: always
-    env_file:
-      - ./.env
     environment:
       - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?sslmode=disable
+      - ETH_URL=ws://fullnode.dappnode:8546
+      - ETH_CHAIN_ID=1
+      - ROOT=/chainlink
+      - LOG_LEVEL=debug
+      - CHAINLINK_TLS_PORT=0
+      - SECURE_COOKIES=false
+      - ALLOW_ORIGINS=*
+      - "NOTIFICATION_EMAIL="
+      - "ORACLE_CONTRACT_ADDRESS="
     ports: 
       - "6688:6688"
     links:
-      - "postgres"
+      - "chainlink-db.public.dappnode.eth"
     volumes:
       - "./chainlink:/chainlink"
     command: "local n -p /chainlink/.password -a /chainlink/.api"

@@ -1,0 +1,54 @@
+{
+  "description": "Configure your Chainlink node",
+  "type": "object",
+  "required": [
+    "postgresUser",
+    "postgresPassword",
+    "postgresDb",
+    "notificationEmail",
+    "oracleContractAddress",
+    "dbPassword",
+    "uiPassword"
+  ],
+  "properties": {
+    "postgresUser": {
+      "type": "string",
+      "title": "Postgres User",
+      "description": "The name of the username for the Postgres DB. Any name would do.",
+      "pattern": "^[a-z]{20}$"
+    },
+    "postgresPassword": {
+      "type": "string",
+      "title": "Postgres Password",
+      "description": "Password for the Postgres DB user."
+    },
+    "postgresDb": {
+      "type": "string",
+      "title": "Postgres Database",
+      "description": "Name of the database to be used with your node.",
+      "default": "chainlink"
+    },
+    "notificationEmail": {
+      "type": "string",
+      "title": "Notification Email",
+      "description": "Email to get notifications at.",
+      "pattern": "^([a-zA-Z0-9_\\-\\.]+)@([a-zA-Z0-9_\\-\\.]+)\\.([a-zA-Z]{2,5})$"
+    },
+    "oracleContractAddress": {
+      "type": "string",
+      "title": "Oracle Contract Address",
+      "description": "Ethereum Address of your Oracle contract.",
+      "pattern": "^0x[a-fA-F0-9]{40}$"
+    },
+    "dbPassword": {
+      "type": "string",
+      "title": "Database Password",
+      "description": "Upload a file containing 1 line with the password for your node."
+    },
+    "uiPassword": {
+      "type": "string",
+      "title": "Node UI Password",
+      "description": "Upload a file containing 2 lines, first line is an email, second line a password to access your Node UI."
+    }
+  }
+}
