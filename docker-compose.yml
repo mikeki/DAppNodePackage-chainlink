@@ -1,39 +1,37 @@
-version: "3.4"
+version: '3.4'
 services:
-  chainlink-db.public.dappnode.eth:
-    image: "chainlink-db.public.dappnode.eth"
+  chainlink-db:
+    image: chainlink-db
     restart: always
     ports:
-      - "5432:5432"
+      - '5432:5432'
     environment:
-      - "POSTGRES_USER="
-      - "POSTGRES_PASSWORD="
-      - "POSTGRES_DB="
-      - "DATABASE_TIMEOUT=0"
+      - POSTGRES_USER=
+      - POSTGRES_PASSWORD=
+      - POSTGRES_DB=
+      - DATABASE_TIMEOUT=0
     volumes:
-      - "pg:/var/lib/postgresql/data"
-
-  chainlink.public.dappnode.eth:
-    image: "smartcontract/chainlink"
+      - 'pg:/var/lib/postgresql/data'
+  chainlink:
+    image: 'smartcontract/chainlink'
     restart: always
     environment:
       - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}?sslmode=disable
-      - ETH_URL=ws://fullnode.dappnode:8546
+      - 'ETH_URL=ws://fullnode.dappnode:8546'
       - ETH_CHAIN_ID=1
       - ROOT=/chainlink
       - LOG_LEVEL=debug
       - CHAINLINK_TLS_PORT=0
       - SECURE_COOKIES=false
       - ALLOW_ORIGINS=*
-      - "NOTIFICATION_EMAIL="
-      - "ORACLE_CONTRACT_ADDRESS="
-    ports: 
-      - "6688:6688"
+      - NOTIFICATION_EMAIL=
+      - ORACLE_CONTRACT_ADDRESS=
+    ports:
+      - '6688:6688'
     links:
-      - "chainlink-db.public.dappnode.eth"
+      - chainlink-db
     volumes:
-      - "./chainlink:/chainlink"
-    command: "local n -p /chainlink/.password -a /chainlink/.api"
-
+      - './chainlink:/chainlink'
+    command: local n -p /chainlink/.password -a /chainlink/.api
 volumes:
-  pg:
+  pg: null

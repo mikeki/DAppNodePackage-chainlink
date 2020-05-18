@@ -1,8 +1,17 @@
 {
-  "name": "chainlink.public.dappnode.eth",
+  "name": "chainlink",
   "version": "0.1.0",
   "description": "Run Chainlink on your DAppNode and start serving oracle requests.",
   "type": "service",
+  "image": {
+    "environment": [
+      "POSTGRES_USER=",
+      "POSTGRES_PASSWORD=",
+      "POSTGRES_DB=",
+      "NOTIFICATION_EMAIL=",
+      "ORACLE_CONTRACT_ADDRESS="
+    ]
+  },
   "author": "mikeki",
   "categories": [
     "Developer tools"
